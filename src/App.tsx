@@ -1,15 +1,14 @@
-import Login from "./Pages/Auth/Login";
-import All from "./Pages/Todo/All";
-import { PromiseFuncProps } from "./types";
+import Login from "@pages/Auth/Login";
+import All from "@pages/Todo/All";
 import { signOut } from "firebase/auth";
-import { auth } from "./config/firebase";
-import useFirebase from "./hooks/useFirebase";
-import Button from "./components/Button";
+import { auth } from "@config/firebase";
+import useFirebase from "@hooks/useFirebase";
+import Button from "@components/Button";
 
 const App = () => {
   const { user, isLoading } = useFirebase();
 
-  const handleSignOut: PromiseFuncProps = async () => {
+  const handleSignOut = async () => {
     try {
       await signOut(auth);
     } catch (err) {

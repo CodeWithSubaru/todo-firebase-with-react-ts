@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Add from "./Add";
-import { getTodoList } from "../../services/todoService";
+import { getTodoList } from "@services/todoService";
 import List from "./component/List";
-import { Todo } from "../../types/todo";
+import { Todo } from "@type/todo";
 
 const All = () => {
   const [todos, setTodos] = useState<Todo[]>([]);

@@ -1,10 +1,10 @@
 import { addDoc, collection } from "firebase/firestore";
 import { FormEvent, useState } from "react";
 import Form from "./component/Form";
-import { db } from "../../config/firebase";
+import { db } from "@config/firebase";
 import { getAuth } from "firebase/auth";
-import { Todo } from "../../types/todo";
-import useForm from "../../hooks/useForm";
+import { Todo } from "@type/todo";
+import useForm from "@hooks/useForm";
 
 const Add = () => {
   const {

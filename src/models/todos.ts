@@ -1,6 +1,6 @@
-import { db } from "../config/firebase";
+import { db } from "@config/firebase";
 import { collection, doc, query } from "firebase/firestore";
-import { Todo } from "../types/todo";
+import { Todo } from "@type/todo";
 
 export const todoCollection = query(collection(db, "todos"));
 

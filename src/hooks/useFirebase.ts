@@ -1,5 +1,5 @@
 import { onAuthStateChanged, User, UserCredential } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "@config/firebase";
 import { useState, useEffect } from "react";
 
 const useFirebase = () => {

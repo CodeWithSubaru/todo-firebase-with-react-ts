@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent } from "react";
 import AddPlus from "/image/add-plus.svg";
-import { FormInput, FormTextArea } from "../../../components/FormInput";
-import { Todo } from "../../../types/todo";
-import Button from "../../../components/Button";
+import { FormInput, FormTextArea } from "@components/FormInput";
+import { type Todo } from "@type/todo";
+import Button from "@components/Button";
 
 interface Props {
   todo: Todo;

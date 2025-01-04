@@ -1,7 +1,7 @@
 import CheckMarkShaded from "/image/check-circle-shaded.svg";
 import CheckMark from "/image/check-circle.svg";
-import { deleteTodo, updateTodo } from "../../../services/todoService";
-import { Todo } from "../../../types/todo";
+import { deleteTodo, updateTodo } from "@services/todoService";
+import { Todo } from "@type/todo";
 
 const List = ({ todo }: { todo: Todo }) => {
   return (

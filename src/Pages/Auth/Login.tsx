@@ -1,15 +1,14 @@
 import { ChangeEvent, useState } from "react";
-import { auth, googleProvider } from "../../config/firebase";
+import { auth, googleProvider } from "@config/firebase";
 import {
   browserSessionPersistence,
   createUserWithEmailAndPassword,
   setPersistence,
   signInWithPopup,
 } from "firebase/auth";
-import { PromiseFuncProps } from "../../types";
-import useFirebase from "../../hooks/useFirebase";
-import { FormInput } from "../../components/FormInput";
-import Button from "../../components/Button";
+import useFirebase from "@hooks/useFirebase";
+import { FormInput } from "@components/FormInput";
+import Button from "@components/Button";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -17,7 +16,7 @@ const Login = () => {
 
   const { setUser } = useFirebase();
 
-  const handleSignInUser: PromiseFuncProps = async () => {
+  const handleSignInUser = async () => {
     try {
       await setPersistence(auth, browserSessionPersistence);
       const authenticated = await createUserWithEmailAndPassword(
@@ -32,7 +31,7 @@ const Login = () => {
     }
   };
 
-  const handleSignInGoogle: PromiseFuncProps = async () => {
+  const handleSignInGoogle = async () => {
     try {
       const authenticated = await signInWithPopup(auth, googleProvider);
       setUser(authenticated);
@@ -47,7 +46,7 @@ const Login = () => {
         <FormInput
           label="Email"
           value={email}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
             setEmail(e.target.value)
           }
           required
@@ -57,7 +56,7 @@ const Login = () => {
         <FormInput
           label="Password"
           value={password}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
             setPassword(e.target.value)
           }
           required
