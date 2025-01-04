@@ -10,7 +10,7 @@ export const getTodoList = async (
     const unsubscribe = onSnapshot(todoCollection, (querySnapshot) => {
       const todosArr: Todo[] = [];
       querySnapshot.forEach((doc) => {
-        const todo = doc.data() as Todo;
+        const todo = { id: doc.id, ...doc.data() } as Todo;
         todosArr.push(todo);
       });
 
