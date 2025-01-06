@@ -15,5 +15,5 @@ export default function useForm<T>(initialState: T) {
 
   const reset = () => setValues(initialState);
 
-  return { values, handleChange, reset };
+  return { values, setValues, handleChange, reset };
 }

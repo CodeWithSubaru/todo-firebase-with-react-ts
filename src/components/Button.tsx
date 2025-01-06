@@ -12,7 +12,7 @@ export default function Button({
   onClick?: () => void;
 } & PropsWithChildren &
   ButtonHTMLAttributes<HTMLButtonElement>) {
-  let btnClassName: string | null;
+  let btnClassName: string;
 
   switch (variant) {
     case "primary":

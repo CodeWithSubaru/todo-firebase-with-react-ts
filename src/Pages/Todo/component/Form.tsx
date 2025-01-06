@@ -1,11 +1,15 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from "react";
 import AddPlus from "/image/add-plus.svg";
-import { FormInput, FormTextArea } from "@components/FormInput";
+import { FormInput } from "@components/FormInput";
 import { type Todo } from "@type/todo";
 import Button from "@components/Button";
+import Editor from "@components/Editor";
+import clsx from "clsx";
 
 interface Props {
+  className?: string;
   todo: Todo;
+  setValues: Dispatch<SetStateAction<Todo>>;
   onTodoChange: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -13,11 +17,21 @@ interface Props {
   addBtnLoading: boolean;
 }
 
-const Form = ({ todo, onTodoChange, onSubmit, addBtnLoading }: Props) => {
+const Form = ({
+  todo,
+  setValues,
+  onTodoChange,
+  onSubmit,
+  className,
+  addBtnLoading,
+}: Props) => {
   return (
     <form
       onSubmit={onSubmit}
-      className="block mx-auto mt-10 my-5 max-w-sm p-6 space-y-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      className={clsx(
+        "relative p-6 space-y-5 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700",
+        className
+      )}
     >
       <FormInput
         label="Title"
@@ -27,23 +41,21 @@ const Form = ({ todo, onTodoChange, onSubmit, addBtnLoading }: Props) => {
         placeholder="ex: Title 1"
       />
 
-      <FormTextArea
-        label="Description"
-        name="description"
-        value={todo.description}
-        onChange={onTodoChange}
-        placeholder="ex: Describe your task..."
+      <Editor
+        markdown={todo.description}
+        onChange={(value?: string) =>
+          setValues({ ...todo, description: value! })
+        }
       />
 
-      <Button
-        className="flex justify-center items-center leading-3 gap-x-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        disabled={addBtnLoading}
-      >
-        <img src={AddPlus} alt="plus icon" className="h-4 w-4" />
-        <span className="self-end uppercase tracking-wide">
-          {addBtnLoading ? "Saving..." : "Add"}
-        </span>
-      </Button>
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gray-800">
+        <Button disabled={addBtnLoading}>
+          <img src={AddPlus} alt="plus icon" className="h-4 w-4" />
+          <span className="self-end uppercase tracking-wide">
+            {addBtnLoading ? "Saving..." : "Save"}
+          </span>
+        </Button>
+      </div>
     </form>
   );
 };

@@ -1,7 +1,7 @@
 import { db } from "@config/firebase";
-import { collection, doc, query } from "firebase/firestore";
-import { Todo } from "@type/todo";
+import { TodoId } from "@type/todo";
+import { collection, doc } from "firebase/firestore";
 
-export const todoCollection = query(collection(db, "todos"));
+export const todoCollectionRef = collection(db, "todos");
 
-export const todoCollectionById = (id: Todo["id"]) => doc(db, "todos", id);
+export const todoCollectionById = (id: TodoId) => doc(db, "todos", id!);

@@ -14,6 +14,17 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.wmde-markdown-var.w-md-editor {
+  height: 100% !important;
+}
+
+.w-md-editor-toolbar {
+  position: sticky;
+  top: 15px;
+  left: 0;
+  z-index: 2;
+}
+
 :focus-visible {
   outline: none;
 }
