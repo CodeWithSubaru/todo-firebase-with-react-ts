@@ -78,13 +78,13 @@ const All = () => {
   }, [todos, searchTitleTodo, filteredBy]);
 
   return (
-    <div className="flex flex-col gap-y-5">
-      <div className="relative flex flex-wrap items-start gap-x-5 px-5 w-full h-[580px] overflow-y-auto">
+    <div className="flex flex-col mx-5 gap-y-5">
+      <div className="relative flex flex-col gap-y-5 sm:flex-row items-start gap-x-5 px-5 w-full min-h-[580px]">
         {/* Add Snippet */}
         <Add
           isUpdateTodo={isUpdateTodo}
           onToggleUpdateTodo={toggleUpdateTodo}
-          className="sticky top-0 left-0 w-1/2 h-full overflow-hidden"
+          className="static sm:sticky top-0 left-0 w-full sm:w-1/2 h-full overflow-hidden"
           todo={todo}
           handleTodoChange={handleTodoChange}
           setValues={setValues}
@@ -92,7 +92,7 @@ const All = () => {
         />
 
         {/* List of Snippets */}
-        <div className="relative h-full flex-1 flex flex-col gap-y-5 justify-start items-center overflow-y-auto">
+        <div className="relative w-full sm:w-1/2 h-full flex-1 flex flex-col gap-y-5 justify-start items-center">
           <div className="w-full flex justify-stretch sticky top-0 left-0 bg-gray-900 z-10">
             <FormInput
               containerClassName="w-2/4 mr-auto"
@@ -125,7 +125,7 @@ const All = () => {
           </div>
 
           {filteredTodos.length === 0 ? (
-            <p className="text-white my-auto">Loading...</p>
+            <p className="text-white my-auto">No Results Found...</p>
           ) : (
             filteredTodos.map((todo) => (
               <List

@@ -17,7 +17,7 @@ const App = () => {
   };
 
   return (
-    <div className="h-full bg-gray-900">
+    <div className="min-h-full bg-gray-900">
       <div className="flex justify-between px-4 py-3">
         <h1 className="text-white text-xl">Todo List</h1>
         <div>{user && <Button onClick={handleSignOut}>Sign Out</Button>}</div>
