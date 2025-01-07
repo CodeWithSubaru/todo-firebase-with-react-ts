@@ -54,11 +54,13 @@ const List = ({
           </span>
         </div>
       </div>
-      <Markdown
-        type="md"
-        markdown={todo.description}
-        className="max-h-52 overflow-auto p-2"
-      />
+      <a href="">
+        <Markdown
+          type="md"
+          markdown={todo.description}
+          className="max-h-52 overflow-auto p-2"
+        />
+      </a>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from "react";
-import AddPlus from "/image/add-plus.svg";
 import { FormInput } from "@components/FormInput";
 import { type Todo } from "@type/todo";
 import Button from "@components/Button";
@@ -13,6 +12,7 @@ interface Props {
   onTodoChange: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  onReset: () => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
   addBtnLoading: boolean;
 }
@@ -22,6 +22,7 @@ const Form = ({
   setValues,
   onTodoChange,
   onSubmit,
+  onReset,
   className,
   addBtnLoading,
 }: Props) => {
@@ -34,11 +35,10 @@ const Form = ({
       )}
     >
       <FormInput
-        label="Title"
         name="title"
         value={todo.title}
         onChange={onTodoChange}
-        placeholder="ex: Title 1"
+        placeholder="Title"
       />
 
       <Editor
@@ -48,12 +48,20 @@ const Form = ({
         }
       />
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gray-800">
-        <Button disabled={addBtnLoading}>
-          <img src={AddPlus} alt="plus icon" className="h-4 w-4" />
-          <span className="self-end uppercase tracking-wide">
-            {addBtnLoading ? "Saving..." : "Save"}
-          </span>
+      <div className="absolute bottom-0 left-0 right-0 flex p-4 bg-gray-800">
+        <Button
+          onClick={onReset}
+          variant="secondary"
+          className="self-end uppercase tracking-wide"
+        >
+          Reset
+        </Button>
+
+        <Button
+          disabled={addBtnLoading}
+          className="self-end uppercase tracking-wide"
+        >
+          {addBtnLoading ? "Saving..." : "Save"}
         </Button>
       </div>
     </form>

@@ -55,6 +55,7 @@ const Add = ({
   return (
     <Form
       className={className}
+      onReset={reset}
       todo={todo}
       setValues={setValues}
       onTodoChange={handleTodoChange}

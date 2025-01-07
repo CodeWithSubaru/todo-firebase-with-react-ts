@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
 type BtnVariant = "primary" | "secondary" | "danger";
@@ -5,10 +6,12 @@ type BtnVariant = "primary" | "secondary" | "danger";
 export default function Button({
   variant = "primary",
   onClick,
+  className,
   children,
   ...props
 }: {
   variant?: BtnVariant;
+  className?: string;
   onClick?: () => void;
 } & PropsWithChildren &
   ButtonHTMLAttributes<HTMLButtonElement>) {
@@ -33,7 +36,11 @@ export default function Button({
   }
 
   return (
-    <button className={btnClassName} onClick={onClick} {...props}>
+    <button
+      className={clsx(btnClassName, className)}
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );

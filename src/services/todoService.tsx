@@ -1,7 +1,6 @@
 import {
   addDoc,
   deleteDoc,
-  limit,
   onSnapshot,
   orderBy,
   query,
@@ -17,23 +16,19 @@ import { getAuth } from "firebase/auth/cordova";
 /**
  * Get All Todo
  */
-export const getTodoList = async (
-  callback: Dispatch<SetStateAction<Todo[]>>
-) => {
+export const getTodoList = (setTodos: Dispatch<SetStateAction<Todo[]>>) => {
   checkForErrors(() => {
-    const todoQuery = query(
+    const todosQuery = query(
       todoCollectionRef,
       where("userId", "==", getAuth().currentUser?.uid),
-      orderBy("updated_at", "desc"),
-      limit(5)
+      orderBy("updated_at", "desc")
     );
 
-    const unsubscribe = onSnapshot(todoQuery, (querySnapshot) => {
-      const todoCollections = querySnapshot.docs.map(
+    const unsubscribe = onSnapshot(todosQuery, (querySnapshot) => {
+      const newTodos = querySnapshot.docs.map(
         (doc) => ({ id: doc.id, ...doc.data() } as Todo)
       );
-
-      callback(todoCollections);
+      setTodos(newTodos);
     });
 
     return () => unsubscribe();
