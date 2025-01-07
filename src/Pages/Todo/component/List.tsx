@@ -8,10 +8,12 @@ const List = ({
   todo,
   onToggleUpdateTodo,
   setValues,
+  onSetViewTodo,
 }: {
   todo: Todo;
   onToggleUpdateTodo: () => void;
   setValues: Dispatch<SetStateAction<Todo>>;
+  onSetViewTodo: (todo: Todo) => void;
 }) => {
   return (
     <div
@@ -54,13 +56,13 @@ const List = ({
           </span>
         </div>
       </div>
-      <a href="">
+      <div onClick={() => onSetViewTodo(todo)}>
         <Markdown
           type="md"
           markdown={todo.description}
           className="max-h-52 overflow-auto p-2"
         />
-      </a>
+      </div>
     </div>
   );
 };

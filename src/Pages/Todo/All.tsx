@@ -5,12 +5,15 @@ import List from "./component/List";
 import { Todo } from "@type/todo";
 import useForm from "@hooks/useForm";
 import { FormInput, FormSelect } from "@components/FormInput";
+import Markdown from "@components/Markdown";
+import Button from "@components/Button";
 
 const All = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isUpdateTodo, setUpdateTodo] = useState(false);
   const [searchTitleTodo, setSearchTitleTodo] = useState<string>("");
   const [filteredBy, setFilteredBy] = useState("");
+  const [viewTodo, setViewTodo] = useState<Todo | null>(null);
 
   const {
     values: todo,
@@ -77,9 +80,28 @@ const All = () => {
     return filter;
   }, [todos, searchTitleTodo, filteredBy]);
 
+  function handleSetViewTodo(todo: Todo | null) {
+    setViewTodo(todo);
+  }
+
+  if (viewTodo) {
+    return (
+      <div className="w-full">
+        <Button
+          variant="secondary"
+          className="me-0 w-1/4"
+          onClick={() => handleSetViewTodo(null)}
+        >
+          Back
+        </Button>
+        <Markdown type="md" markdown={viewTodo.description} className="p-2" />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col mx-5 gap-y-5">
-      <div className="relative flex flex-col gap-y-5 sm:flex-row items-start gap-x-5 px-5 w-full min-h-[580px]">
+    <div className="flex flex-col px-2 lg:px-5 gap-y-5">
+      <div className="relative flex flex-col gap-y-5 sm:flex-row items-start gap-x-5 w-full min-h-[580px]">
         {/* Add Snippet */}
         <Add
           isUpdateTodo={isUpdateTodo}
@@ -96,7 +118,7 @@ const All = () => {
           <div className="w-full flex justify-stretch sticky top-0 left-0 bg-gray-900 z-10">
             <FormInput
               containerClassName="w-2/4 mr-auto"
-              placeholder="Search for"
+              placeholder="Search for title..."
               value={searchTitleTodo}
               onChange={(e) => setSearchTitleTodo(e.target.value)}
             />
@@ -129,6 +151,7 @@ const All = () => {
           ) : (
             filteredTodos.map((todo) => (
               <List
+                onSetViewTodo={handleSetViewTodo}
                 key={todo.id}
                 onToggleUpdateTodo={toggleUpdateTodo}
                 todo={todo}
